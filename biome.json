@@ -15,7 +15,17 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"preset": "recommended"
+			"preset": "recommended",
+			"nursery": {
+				"useSortedClasses": {
+					"level": "warn",
+					"fix": "safe",
+					"options": {
+						"attributes": ["className"],
+						"functions": ["cn", "cva", "clsx", "twMerge"]
+					}
+				}
+			}
 		}
 	},
 	"javascript": {
@@ -27,7 +37,21 @@
 		"enabled": true,
 		"actions": {
 			"source": {
-				"organizeImports": "on"
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							[":NODE:", ":BUN:"],
+							":BLANK_LINE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":PACKAGE:",
+							":BLANK_LINE:",
+							["@/**", "~/**"],
+							":BLANK_LINE:",
+							":PATH:"
+						]
+					}
+				}
 			}
 		}
 	}
