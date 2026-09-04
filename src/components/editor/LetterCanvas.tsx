@@ -7,7 +7,7 @@ import {
 	lineStyleBackground,
 	mmToPx,
 } from "@/lib/layouts";
-import { paginate } from "@/lib/paginate";
+import { type Page, paginate } from "@/lib/paginate";
 import { getPaper, TEXTURE_DATA_URL } from "@/lib/papers";
 import { useLetterStore } from "@/store/useLetterStore";
 
@@ -49,7 +49,9 @@ export function LetterCanvas({
 	const { content, setContent, zoom, lineStyle, textureEnabled } =
 		useLetterStore();
 	const s = useCanvasStyle();
-	const [pages, setPages] = useState<string[]>([""]);
+	const [pages, setPages] = useState<Page[]>([
+		{ text: "", startOffset: 0, endOffset: 0 },
+	]);
 	// One blank ruled line above the first line of text.
 	const extraTopPx = s.lineHeightPx;
 	const contentWidth = s.widthPx - s.paddingPx * 2;
@@ -96,8 +98,8 @@ export function LetterCanvas({
 
 	return (
 		<div className="flex flex-col items-center gap-10 py-10">
-			{pages.map((pageText, i) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: page order is stable; keying by index keeps the first-page textarea from remounting.
+			{pages.map((page, i) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: page order is stable; keying by index keeps each page's textarea from remounting.
 				<div key={i} className="flex flex-col items-center gap-2">
 					<div
 						ref={(el) => {
@@ -127,30 +129,20 @@ export function LetterCanvas({
 								}}
 							/>
 						)}
-						{i === 0 ? (
-							<textarea
-								aria-label="Letter text"
-								value={content}
-								onChange={(e) => setContent(e.target.value)}
-								spellCheck={false}
-								className="absolute inset-0 h-full w-full resize-none bg-transparent outline-none"
-								style={{ ...textStyle, caretColor: s.inkColor }}
-							/>
-						) : (
-							<div
-								className="absolute inset-0 whitespace-pre-wrap"
-								style={textStyle}
-								aria-hidden="true"
-							>
-								{pageText}
-							</div>
-						)}
-						{i === 0 && pages.length > 1 && (
-							<div
-								className="pointer-events-none absolute inset-0 whitespace-pre-wrap opacity-0"
-								aria-hidden="true"
-							/>
-						)}
+						<textarea
+							aria-label={`Letter text — page ${i + 1}`}
+							value={page.text}
+							onChange={(e) => {
+								const next =
+									content.slice(0, page.startOffset) +
+									e.target.value +
+									content.slice(page.endOffset);
+								setContent(next);
+							}}
+							spellCheck={false}
+							className="absolute inset-0 h-full w-full resize-none overflow-hidden bg-transparent outline-none"
+							style={{ ...textStyle, caretColor: s.inkColor }}
+						/>
 					</div>
 					<span className="text-muted-foreground text-xs tracking-wide">
 						Page {i + 1} of {pages.length}
