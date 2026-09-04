@@ -1,4 +1,4 @@
-export type FontCategory = "Casual" | "Elegant" | "Playful" | "Formal" | "Vintage";
+export type FontCategory = "Casual" | "Elegant" | "Playful" | "Formal" | "Vintage" | "Bangla";
 
 export interface HandFont {
   id: string;
@@ -23,9 +23,11 @@ export const FONTS: HandFont[] = [
   { id: "cedarville", name: "Cedarville Cursive", family: "'Cedarville Cursive', cursive", category: "Vintage" },
   { id: "nothing-you", name: "Nothing You Could Do", family: "'Nothing You Could Do', cursive", category: "Formal" },
   { id: "petit-formal", name: "Petit Formal Script", family: "'Petit Formal Script', cursive", category: "Formal" },
+  { id: "galada", name: "Galada", family: "'Galada', 'Hind Siliguri', cursive", category: "Bangla" },
+  { id: "hind-siliguri", name: "Hind Siliguri", family: "'Hind Siliguri', sans-serif", category: "Bangla" },
 ];
 
-export const FONT_CATEGORIES: FontCategory[] = ["Casual", "Elegant", "Playful", "Formal", "Vintage"];
+export const FONT_CATEGORIES: FontCategory[] = ["Casual", "Elegant", "Playful", "Formal", "Vintage", "Bangla"];
 
 export const getFont = (id: string) => FONTS.find((f) => f.id === id) ?? FONTS[0];
 
@@ -47,6 +49,8 @@ export const GOOGLE_FONTS_HREF =
     "family=Cedarville+Cursive",
     "family=Nothing+You+Could+Do",
     "family=Petit+Formal+Script",
+    "family=Galada",
+    "family=Hind+Siliguri:wght@400;500;600",
     "family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700",
     "family=Karla:wght@400;500;600",
   ].join("&") +
