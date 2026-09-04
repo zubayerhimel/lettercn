@@ -17,6 +17,11 @@ interface LetterState {
   textureEnabled: boolean;
   zoom: number;
   focusMode: boolean;
+  // Envelope
+  recipientAddress: string;
+  senderAddress: string;
+  envelopeSizeId: string;
+  includeStamp: boolean;
   setContent: (v: string) => void;
   setFont: (id: string) => void;
   setFontSize: (v: number) => void;
@@ -30,6 +35,10 @@ interface LetterState {
   setTexture: (v: boolean) => void;
   setZoom: (v: number) => void;
   setFocusMode: (v: boolean) => void;
+  setRecipientAddress: (v: string) => void;
+  setSenderAddress: (v: string) => void;
+  setEnvelopeSize: (v: string) => void;
+  setIncludeStamp: (v: boolean) => void;
   reset: () => void;
 }
 
@@ -48,6 +57,10 @@ const initial = {
   textureEnabled: true,
   zoom: 1,
   focusMode: false,
+  recipientAddress: "Ada Lovelace\n12 Byron Lane\nLondon W1U 6TA\nUnited Kingdom",
+  senderAddress: "",
+  envelopeSizeId: "us10",
+  includeStamp: true,
 };
 
 export const useLetterStore = create<LetterState>()(
@@ -67,6 +80,10 @@ export const useLetterStore = create<LetterState>()(
       setTexture: (textureEnabled) => set({ textureEnabled }),
       setZoom: (zoom) => set({ zoom }),
       setFocusMode: (focusMode) => set({ focusMode }),
+      setRecipientAddress: (recipientAddress) => set({ recipientAddress }),
+      setSenderAddress: (senderAddress) => set({ senderAddress }),
+      setEnvelopeSize: (envelopeSizeId) => set({ envelopeSizeId }),
+      setIncludeStamp: (includeStamp) => set({ includeStamp }),
       reset: () => set({ ...initial }),
     }),
     { name: "letterpress-draft" },
