@@ -75,10 +75,10 @@ export function LetterCanvas({
 	const ruling = useMemo<React.CSSProperties>(() => {
 		const base = lineStyleBackground(lineStyle, s.lineHeightPx, s.inkColor);
 		if (lineStyle !== "ruled" && lineStyle !== "vintage") return base;
-		// Shift rules to sit halfway between text baselines instead of near the top of each row.
-		const yShift = s.paddingPx + s.fontSize * 0.3 + 1;
+		// Phase-align rules to padding so the x-height (visual centre of letters) sits mid-band.
+		const yShift = s.paddingPx + 1;
 		return { ...base, backgroundPosition: `0 ${yShift}px` };
-	}, [lineStyle, s.lineHeightPx, s.inkColor, s.paddingPx, s.fontSize]);
+	}, [lineStyle, s.lineHeightPx, s.inkColor, s.paddingPx]);
 
 	const registry = useRef<HTMLDivElement[]>([]);
 	// Cheap ref sync; runs after each render so pagesRef always mirrors the mounted page nodes.
