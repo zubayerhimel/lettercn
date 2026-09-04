@@ -14,4 +14,4 @@ export const ENVELOPES: EnvelopeSize[] = [
   { id: "square", name: "Square", widthMm: 165, heightMm: 165, description: "Card / invitation" },
 ];
 
-export const getEnvelopeSize = (id: string) => ENVELOPES.find((e) => e.id === id) ?? ENVELOPES[0];
+export const getEnvelopeSize = (id: string): EnvelopeSize => ENVELOPES.find((e) => e.id === id) ?? (ENVELOPES[0] as EnvelopeSize);

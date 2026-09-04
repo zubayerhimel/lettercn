@@ -23,7 +23,7 @@ export const LAYOUTS: Layout[] = [
   { id: "envelope", name: "Envelope Card", widthMm: 177.8, heightMm: 127, defaultMarginMm: 14, orientation: "landscape" },
 ];
 
-export const getLayout = (id: string) => LAYOUTS.find((l) => l.id === id) ?? LAYOUTS[0];
+export const getLayout = (id: string): Layout => LAYOUTS.find((l) => l.id === id) ?? (LAYOUTS[0] as Layout);
 
 export const LINE_STYLES: { id: LineStyle; name: string }[] = [
   { id: "blank", name: "Blank" },

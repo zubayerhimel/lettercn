@@ -17,7 +17,7 @@ export const PAPERS: Paper[] = [
   { id: "midnight", name: "Midnight", color: "#1A1D2E", dark: true },
 ];
 
-export const getPaper = (id: string) => PAPERS.find((p) => p.id === id) ?? PAPERS[0];
+export const getPaper = (id: string): Paper => PAPERS.find((p) => p.id === id) ?? (PAPERS[0] as Paper);
 
 export const INKS: { id: string; name: string; color: string }[] = [
   { id: "black", name: "Black", color: "#191512" },
@@ -32,8 +32,8 @@ export const INKS: { id: string; name: string; color: string }[] = [
 
 /** Subtle inline-SVG fibre grain so exports never depend on network assets. */
 export const TEXTURE_DATA_URL =
-  "url(\"data:image/svg+xml;utf8," +
+  'url("data:image/svg+xml;utf8,' +
   encodeURIComponent(
     `<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(#n)' opacity='0.5'/></svg>`,
   ) +
-  "\")";
+  '")';

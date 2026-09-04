@@ -29,7 +29,7 @@ export const FONTS: HandFont[] = [
 
 export const FONT_CATEGORIES: FontCategory[] = ["Casual", "Elegant", "Playful", "Formal", "Vintage", "Bangla"];
 
-export const getFont = (id: string) => FONTS.find((f) => f.id === id) ?? FONTS[0];
+export const getFont = (id: string): HandFont => FONTS.find((f) => f.id === id) ?? (FONTS[0] as HandFont);
 
 export const GOOGLE_FONTS_HREF =
   "https://fonts.googleapis.com/css2?" +
