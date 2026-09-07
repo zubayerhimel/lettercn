@@ -72,7 +72,7 @@ export function SidebarControls({
 								max={48}
 								step={1}
 								value={[s.fontSize]}
-								onValueChange={([v]) => s.setFontSize(v)}
+								onValueChange={([v]) => v !== undefined && s.setFontSize(v)}
 							/>
 						</div>
 						<div className="space-y-2">
@@ -82,7 +82,7 @@ export function SidebarControls({
 								max={2.6}
 								step={0.05}
 								value={[s.lineHeight]}
-								onValueChange={([v]) => s.setLineHeight(v)}
+								onValueChange={([v]) => v !== undefined && s.setLineHeight(v)}
 							/>
 						</div>
 					</div>
@@ -143,7 +143,7 @@ export function SidebarControls({
 								max={40}
 								step={1}
 								value={[s.marginMm]}
-								onValueChange={([v]) => s.setMargin(v)}
+								onValueChange={([v]) => v !== undefined && s.setMargin(v)}
 							/>
 						</div>
 					</div>
